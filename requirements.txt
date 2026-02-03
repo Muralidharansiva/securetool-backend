@@ -1,0 +1,5 @@
+Django
+requests
+django-cors-headers
+whitenoise
+gunicorn
