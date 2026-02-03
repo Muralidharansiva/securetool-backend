@@ -14,7 +14,7 @@ def register(request):
 
     try:
         data = json.loads(request.body.decode("utf-8"))
-    except json.JSONDecodeError:
+    except Exception:
         return JsonResponse({"error": "Invalid JSON format"}, status=400)
 
     username = data.get("username")
@@ -37,7 +37,7 @@ def user_login(request):
 
     try:
         data = json.loads(request.body.decode("utf-8"))
-    except json.JSONDecodeError:
+    except Exception:
         return JsonResponse({"error": "Invalid JSON format"}, status=400)
 
     user = authenticate(
@@ -49,23 +49,10 @@ def user_login(request):
         return JsonResponse({"error": "Invalid credentials"}, status=401)
 
     login(request, user)
-
     return JsonResponse({
         "status": "logged_in",
-        "role": "admin" if user.is_staff else "user"
+        "is_admin": user.is_staff
     })
-
-    data = json.loads(request.body)
-    user = authenticate(
-        username=data["username"],
-        password=data["password"]
-    )
-    if user:
-        login(request, user)
-        return JsonResponse({
-            "role": "admin" if user.is_staff else "user"
-        })
-    return JsonResponse({"error": "invalid"}, status=401)
 
 # ---------- ADMIN OTP ----------
 def admin_send_otp(request):

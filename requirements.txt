@@ -1,5 +1,6 @@
-Django
-requests
-django-cors-headers
-whitenoise
+Django>=5.0
 gunicorn
+whitenoise
+django-cors-headers
+python-dotenv
+requests

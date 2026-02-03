@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     "accounts",
     "audit",
 ]
-
+DEBUG=False
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
